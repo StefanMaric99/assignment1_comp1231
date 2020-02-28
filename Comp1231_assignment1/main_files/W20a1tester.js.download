@@ -1,0 +1,84 @@
+function loadJs(jsFilePath){
+    let js = document.createElement("script");
+    js.type = "text/javascript";
+    js.src = jsFilePath;
+    //document.body.appendChild(js);
+    document.getElementsByTagName('head')[0].appendChild(js);
+}
+loadJs(STUDENT_ID + '-functions.js');
+function _one(){
+    let first_name = 'maziar', last_name = 'masoudi', program_code = 'T127', internatial = 'I am', num_of_courses = 7;
+    let str = `My Name is ${first_name} ${last_name} and I\'m in ${program_code} program. I am currently taking ${num_of_courses}`;
+    str += ` and ${internatial} student`;
+    console.log(str);
+}
+
+function _step(id)
+{
+    console.log('\n%c **************** ' + id + ' ****************\n','background: #000; color: #fff');
+}
+
+
+function getRand(print=false){
+    const rn = (Math.floor(Math.random() * 10));
+    if(print) console.log('Random number is: ' + rn);
+    return rn;
+}
+
+function getRandArray(noNnegative=false)
+{
+
+    noNnegative = (noNnegative ? 100 : -100);
+    let positive_negative = (getRand()%2 ? +100  : noNnegative);
+    const arr =  Array.from({length: getRand()}, () => Math.floor(Math.random() * positive_negative));
+    return arr;
+}
+
+function getRandWord(){
+    const randWords = ["escapology", "brightwork", "verkrampte", "protectrix", "nudibranch", "grandchild", "newfangled", "flugelhorn", "mythologer", "pluperfect", "jellygraph", "quickthorn", "rottweiler", "technician", "cowpuncher", "middlebrow", "jackhammer", "triphthong", "wunderkind", "dazzlement", "jabberwock", "witchcraft", "pawnbroker", "thumbprint", "motorcycle", "cryptogram", "torchlight", "bankruptcy"];
+    return  randWords[Math.ceil(Math.random() * randWords.length - 1)];
+}
+
+function getRandChar(){
+    let char_list = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    return char_list.charAt(Math.floor(Math.random() * char_list.length));
+}
+let args = {
+    'step1' :[],
+    'step2' :[getRand(),getRand()],
+    'step3' :[getRand(),getRand()],
+    'step4' :[getRand()],
+    'step5' :[getRand(),getRand(),getRand()],
+    'step6' : [getRandArray()],
+    'step7' : [getRand(),getRand()],
+    'step8' : [getRandChar()],
+    'step9' : [getRandArray(true)],
+    'step10' : [getRandWord()]
+}
+
+
+
+setTimeout(__RUN,1000);
+console.log('%c Any question,please post it on Blackboard under assignment one FAQ.','background: #222; color: #bada55');
+function __RUN(){
+    let params = null;
+    for(let f in myFunctions)
+    {
+        try{
+            _step(f.replace('_',' ').toUpperCase());
+            if(args[f])
+              params = args[f]
+            if(window[(myFunctions[f])] == undefined)
+                console.log('Function is not implemented');
+            else{
+                console.log('Calling ' + myFunctions[f] + '(' + params + ')');
+                window[(myFunctions[f])].apply(null, params); 
+            }
+        }catch(err)
+        {
+            console.log('%c ' + err,'color:#F00');
+        }
+ 
+
+   }
+}
