@@ -56,15 +56,20 @@ function largestNum(n1,n2,n3) {
     }
 }
 //function6
-function valuesCheck(arrVal){
-    let tempArr = [12];
-    tempArr = arrVal;
-
-    let low,high;
-    tempArr.sort();
-    low = tempArr[0];
-    high = tempArr.length;
-
+function valuesCheck(){
+    let largest,smallest;
+    largest = arguments[0];
+    smallest = arguments[0];
+    for(let i = 0;i<arguments.length;i++){
+        if(arguments[i]>largest){
+            largest = arguments[i];
+        }
+    }
+    for(let k = 1;k<arguments.length;k++){
+        if(arguments[k]>smallest){
+            largest = arguments[k];
+        }
+    }
 }
 //function7
 function mCalc(firstN,secondN){
